@@ -39,5 +39,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Screens/YouWin.unity
     guid: ad90f3a4ec469114183b65f8e9304daa
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 5954ecbd1136c4a40915ff771156498c, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

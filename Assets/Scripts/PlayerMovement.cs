@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,17 +12,30 @@ public class PlayerMovement : MonoBehaviour
     // Direção atual do jogador (pública para outros scripts acessarem)
     public Vector2 lastDirection { get; private set; } = Vector2.down;
 
+    // Vector2 que armazena os inputs do joystick de movimento
+    private Vector2 myInput;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Método responsável por obter as entradas do joystick.
+    /// </summary>
+    /// <param name="value">Callback com as entradas de joystick, vindos do Input Actions</param>
+    public void MoverPersonagem(InputAction.CallbackContext value)
+    {
+        myInput = value.ReadValue<Vector2>();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        // Usa input do joystick se disponível, caso contrário usa Input tradicional (teclado)
+        float moveHorizontal = myInput.x != 0 ? myInput.x : Input.GetAxis("Horizontal");
+        float moveVertical = myInput.y != 0 ? myInput.y : Input.GetAxis("Vertical");
 
         // Previne movimento diagonal - prioriza o eixo com maior input
         if (Mathf.Abs(moveHorizontal) > 0 && Mathf.Abs(moveVertical) > 0)
