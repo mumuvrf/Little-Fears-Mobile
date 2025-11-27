@@ -29,4 +29,9 @@ public class MensagemProximidade : MonoBehaviour
             messageUI.SetActive(false);
         }
     }
+
+    public void closeMessage()
+    {
+        messageUI.SetActive(false);
+    }
 }
